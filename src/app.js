@@ -73,22 +73,6 @@ app.get("/weather", (req, res) => {
   }
 });
 
-// app.get("/products", (req, res) => {
-//   const query = req.query.search;
-//   console.log(query);
-//   if (!query) {
-//     return res.send({
-//       error: "You must supply a search term!"
-//     });
-//     console.log("Nothing searched for");
-//   } else {
-//     console.log("Searched for: ", query);
-//   }
-//   res.send({
-//     products: []
-//   });
-// });
-
 app.get("/help/*", (req, res) => {
   res.render("404", {
     title: "404",
