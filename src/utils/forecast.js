@@ -10,15 +10,20 @@ const forecast = (latitude, longitude, callback) => {
 
   request({ url, json: true }, (error, { body }) => {
     if (error) {
-      callback("Unable to connect to weather service!", undefined);
+      callback("Unable to connect to weather service!", undefined, undefined);
     } else if (body.error) {
-      callback(body.error, undefined);
+      callback(body.error, undefined, undefined);
     } else {
       const { temperature, precipProbability } = body.currently;
-      const { summary } = body.daily.data[0];
+      const {
+        summary,
+        icon,
+        temperatureHigh,
+        temperatureLow
+      } = body.daily.data[0];
       const forecast = `${summary} It is currently ${temperature}\u2103 out. There is a ${precipProbability *
-        100}% chance of rain.`;
-      callback(undefined, forecast);
+        100}% chance of rain. The temperature high will be ${temperatureHigh}\u2103 (daytime) and the temperature low will be ${temperatureLow}\u2103 (overnight).`;
+      callback(undefined, forecast, icon);
     }
   });
 };
